@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
   })
 })
 
-app.post('/items', (req, res) => {
+app.post('/itemdata', (req, res) => {
   item_model.createItem(req.body)
   .then(response => {
     res.status(200).send(response);
@@ -32,7 +32,7 @@ app.post('/items', (req, res) => {
   })
 })
 
-app.delete('/items/:item_id', (req, res) => {
+app.delete('/itemdata/:itemid', (req, res) => {
   item_model.deleteItem(req.params.item_id)
   .then(response => {
     res.status(200).send(response);
@@ -41,7 +41,7 @@ app.delete('/items/:item_id', (req, res) => {
     res.status(500).send(error);
   })
 })
-app.put("/items/:item_id", (req, res) => {
+app.put("/itemdata/:itemid", (req, res) => {
   const item_id = req.params.item_id;
   const body = req.body;
   item_model

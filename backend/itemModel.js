@@ -9,7 +9,7 @@ const pool = new Pool({
 const getItems = async () => {
     try {
       return await new Promise(function (resolve, reject) {
-        pool.query("SELECT * FROM items", (error, results) => {
+        pool.query("SELECT * FROM itemdata", (error, results) => {
           if (error) {
             reject(error);
           }
@@ -30,7 +30,7 @@ const getItems = async () => {
     return new Promise(function (resolve, reject) {
       const { item_id,item_name,item_type,item_price,owner_id } = body;
       pool.query(
-        "INSERT INTO items (item_id,item_name,item_type,item_price,owner_id) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+        "INSERT INTO itemdata (item_id,item_name,item_type,item_price,owner_id) VALUES ($1, $2, $3, $4, $5) RETURNING *",
         [item_id,item_name,item_type,item_price,owner_id],
         (error, results) => {
           if (error) {
@@ -51,24 +51,24 @@ const getItems = async () => {
   const deleteItem = (item_id) => {
     return new Promise(function (resolve, reject) {
       pool.query(
-        "DELETE FROM items WHERE item_id = $1",
+        "DELETE FROM itemdata WHERE itemid = $1",
         [item_id],
         (error, results) => {
           if (error) {
             reject(error);
           }
-          resolve(`Item deleted with ID: ${item_id}`);
+          resolve(`Item deleted with ID: ${itemid}`);
         }
       );
     });
   };
   //update a item record
-  const updateItem = (item_id, body) => {
+  const updateItem = (itemid, body) => {
     return new Promise(function (resolve, reject) {
-      const { item_name,item_type,item_price,owner_id } = body;
+      const { category, itemname, itemcondition, price, ownerid, ownerfirstname, ownerlastname, phonenumber, address } = body;
       pool.query(
-        "UPDATE items SET item_name = $1, item_type = $2, item_price = $3, owner_id = $4, WHERE id = $5 RETURNING *",
-        [item_name,item_type,item_price,owner_id,item_id,],
+        "UPDATE itemdata SET category = $1, itemname = $2, itemcondition = $3, price = $4, ownerid = $5, WHERE itemid = $9 RETURNING *",
+        [category, itemname, itemcondition, price, ownerid, ownerfirstname, ownerlastname, itemid],
         (error, results) => {
           if (error) {
             reject(error);
