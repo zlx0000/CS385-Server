@@ -28,10 +28,10 @@ const getItems = async () => {
   //create a new item record in the databsse
   const createItem = (body) => {
     return new Promise(function (resolve, reject) {
-      const { item_id,item_name,item_type,item_price,owner_id } = body;
+      const { itemname,itemtype,itemprice,ownerid,ownerfirstname,ownerlastname,phonenumber,address } = body;
       pool.query(
-        "INSERT INTO itemdata (item_id,item_name,item_type,item_price,owner_id) VALUES ($1, $2, $3, $4, $5) RETURNING *",
-        [item_id,item_name,item_type,item_price,owner_id],
+        "INSERT INTO itemdata (itemname,category,price,ownerid,ownerfirstname,ownerlastname,phonemunber,address) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
+        [itemname,itemtype,itemprice,ownerid,ownerfirstname,ownerlastname,phonenumber,address],
         (error, results) => {
           if (error) {
             reject(error);
