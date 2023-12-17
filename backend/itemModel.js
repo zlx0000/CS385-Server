@@ -30,8 +30,8 @@ const getItems = async () => {
     return new Promise(function (resolve, reject) {
       const { itemname,itemtype,itemprice,ownerid,ownerfirstname,ownerlastname,phonenumber,address } = body;
       pool.query(
-        "INSERT INTO itemdata (itemname,category,price,ownerid,ownerfirstname,ownerlastname,phonemunber,address) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
-        [itemname,itemtype,itemprice,ownerid,ownerfirstname,ownerlastname,phonenumber,address],
+        "INSERT INTO itemdata (itemname,category,price,ownerid,ownerfirstname,ownerlastname,phonenumber,address,itemcondition) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *",
+        [itemname,itemtype,itemprice,ownerid,ownerfirstname,ownerlastname,phonenumber,address,itemcondition],
         (error, results) => {
           if (error) {
             reject(error);
